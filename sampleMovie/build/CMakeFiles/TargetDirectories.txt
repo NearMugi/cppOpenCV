@@ -1,0 +1,3 @@
+/home/near/work/cppOpenCV/sampleMovie/build/CMakeFiles/rebuild_cache.dir
+/home/near/work/cppOpenCV/sampleMovie/build/CMakeFiles/sampleMovie.dir
+/home/near/work/cppOpenCV/sampleMovie/build/CMakeFiles/edit_cache.dir
