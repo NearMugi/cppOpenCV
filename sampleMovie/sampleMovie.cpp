@@ -30,7 +30,11 @@ int main(void)
 	std::cout << format("FPS:%f(%fms)",fps, mpf) << std::endl;
 
 	std::string windowName = "Video";
-    cv::Mat image;
+	cv::namedWindow(windowName, cv::WINDOW_NORMAL);
+	// FullScreen
+	cv::setWindowProperty(windowName, cv::WND_PROP_FULLSCREEN, cv::WINDOW_FULLSCREEN);
+    
+	cv::Mat image;
 	loopTime = chrono::system_clock::now();
 	while (1) {
 		processStart = chrono::system_clock::now();
