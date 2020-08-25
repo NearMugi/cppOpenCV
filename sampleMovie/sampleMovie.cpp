@@ -19,13 +19,15 @@ int main(void)
 	chrono::system_clock::time_point loopTime, processStart, processEnd;
 	double processTime, waitTime;
 
-    std::string filepath = "sampleTimeCode.mp4";
+    std::string filepath = "sampleTimeCode60.mp4";
 	cv::VideoCapture cap(filepath);
 	if (cap.isOpened() == false) {
 		return -1;
 	}
+	// fps and mpf(ms per frame)
 	double fps=cap.get(cv::CAP_PROP_FPS);
-	std::cout << format("FPS:%f",fps) << std::endl;
+	double mpf=1000 / fps;
+	std::cout << format("FPS:%f(%fms)",fps, mpf) << std::endl;
 
 	std::string windowName = "Video";
     cv::Mat image;
@@ -43,8 +45,8 @@ int main(void)
 			cap.set(cv::CAP_PROP_POS_FRAMES, 0);
 			cap.read(image);
 		};
-		cv::putText(image, format("Target FPS:%f",fps), cv::Point(10,30), cv::FONT_HERSHEY_SIMPLEX, 1.0, cv::Scalar(255, 255, 255), 2);
-		cv::putText(image, format(" Loop Time:%f",tmpLoopTime), cv::Point(10,60), cv::FONT_HERSHEY_SIMPLEX, 1.0, cv::Scalar(255, 255, 255), 2);
+		cv::putText(image, format("Target FPS:%.2f(%.2fms)",fps, mpf), cv::Point(10,30), cv::FONT_HERSHEY_SIMPLEX, 1.0, cv::Scalar(255, 255, 255), 2);
+		cv::putText(image, format(" Loop Time(ms):%.2f",tmpLoopTime), cv::Point(10,60), cv::FONT_HERSHEY_SIMPLEX, 1.0, cv::Scalar(255, 255, 255), 2);
 		cv::imshow(windowName, image);
 
  		//ESCを押すと終了		
@@ -54,7 +56,7 @@ int main(void)
 		// 処理時間を考慮して待つ
 		processEnd = chrono::system_clock::now();
 		processTime = static_cast<double>(chrono::duration_cast<chrono::microseconds>(processEnd - processStart).count() / 1000.0);
-		waitTime = fps - processTime;
+		waitTime = mpf - processTime;
 		if(waitTime >= 1){
 			cv::waitKey(waitTime);
 		}
