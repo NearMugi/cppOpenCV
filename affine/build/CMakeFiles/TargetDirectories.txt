@@ -1,0 +1,3 @@
+/home/near/work/cppOpenCV/affine/build/CMakeFiles/rebuild_cache.dir
+/home/near/work/cppOpenCV/affine/build/CMakeFiles/affine.dir
+/home/near/work/cppOpenCV/affine/build/CMakeFiles/edit_cache.dir
